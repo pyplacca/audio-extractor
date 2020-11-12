@@ -24,4 +24,4 @@ It's that simple
 python cli.py "path/to/video/file"
 ```
 
-_If you encounter any problems during usage, please feel free to open an issue and I will do well to address_
+_If you encounter any problems during usage, please feel free to open an issue and I will do well to address it_
