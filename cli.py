@@ -1,5 +1,7 @@
 from moviepy.editor import VideoFileClip
-import sys, os
+import time
+import sys
+import os
 
 '''
 Audio Extractor 1.0.0
@@ -61,7 +63,6 @@ def parse_files(directory):
 	return output
 
 def create_destination(count):
-	import time
 	# create a destination folder
 	current_time = time.strftime('%d.%m.%y', time.localtime())
 	original = os.path.join(
