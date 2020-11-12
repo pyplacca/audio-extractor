@@ -14,8 +14,8 @@ pip install -r requirements.txt
 ```
 
 ### Usage
-<p>To convert an audio file, open the directory of the cloned or downloaded repository in the command line and run this command.</p>
-<p>It's that simple</p>
+To convert an audio file, open the directory of the cloned or downloaded repository in the command line and run this command.
+It's that simple
 ```
 python cli.py "path/to/video/file"
 ```
