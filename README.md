@@ -1,6 +1,8 @@
 # Audio Extractor
 Extract audio samples from video files.
 
+_**G**raphical **U**ser **I**nterface version coming soon_
+
 
 ## Before you proceed
 1. Clone or download this repository.
