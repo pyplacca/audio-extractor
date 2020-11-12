@@ -8,13 +8,14 @@
 
 
 ### Installing dependencies
-Install the dependencies listed in `requirements.txt` by running the below command
+Use command below to install the dependencies listed in `requirements.txt`.
 ```
 pip install -r requirements.txt
 ```
 
 ### Usage
-To convert and audio file, open the directory of the cloned or downloaded repository in the command line and run this command
+<p>To convert an audio file, open the directory of the cloned or downloaded repository in the command line and run this command.</p>
+<p>It's that simple</p>
 ```
-python cli.py path/to/video/file
+python cli.py "path/to/video/file"
 ```
