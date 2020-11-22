@@ -1,5 +1,4 @@
 from moviepy.editor import VideoFileClip
-import time
 import sys
 import os
 
@@ -47,22 +46,25 @@ def extract_and_save(file, save_at):
 		return overwrite
 	else:
 		print(f'Sorry! A problem was encountered. '
-			'Could not save audio from {file!r}')
+			f'Could not extract audio from {file!r}')
 
-def parse_files(directory):
+def parse_files(directory, level=1):
 	output = []
 	for file in directory:
 		if os.path.exists(file):
 			if os.path.isfile(file):
-				output += file,
+				if is_video_file(file):
+					output += file,
 			else:
-				output += parse_files(map(
-					lambda item: os.path.join(file, item),
-					os.listdir(file)
-				))
+				if level == 1:
+					output += parse_files(map(
+						lambda item: os.path.join(file, item),
+						os.listdir(file)
+					), level+1)
 	return output
 
 def create_destination(count):
+	import time
 	# create a destination folder
 	current_time = time.strftime('%d.%m.%y', time.localtime())
 	original = os.path.join(
@@ -85,6 +87,11 @@ def create_destination(count):
 	del time
 
 	return original
+
+def is_video_file(fp):
+	extensions = ['mp4','m4v','mkv','mpeg']
+	ext = os.path.basename(fp).split('.')[-1]
+	return ext in extensions
 
 
 if sources:
