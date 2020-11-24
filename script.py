@@ -1,4 +1,5 @@
 from moviepy.editor import VideoFileClip
+from utils import extensions
 import sys
 import os
 
@@ -31,7 +32,7 @@ def extract_and_save(file, save_at):
 
 		if os.path.exists(destination):
 			# get user prompt if the file exists
-			prompt = input(f'{basename!r} already exists in the destination'
+			prompt = input(f'{basename!r} already exists in the destination '
 				'folder.\nWould you like to overwrite this file? (y/n): ')
 			overwrite = prompt.lower() == 'y'
 
@@ -89,49 +90,51 @@ def create_destination(count):
 	return original
 
 def is_video_file(fp):
-	extensions = ['mp4','m4v','mkv','mpeg']
 	ext = os.path.basename(fp).split('.')[-1]
-	return ext in extensions
+	return ext.lower() in extensions['video']
 
 
 if sources:
 	sources = parse_files(sources)
 
-	print('\nFiles prepared for extraction;')
+	if sources:
+		print('\nFiles prepared for extraction;')
 
-	for i, file in enumerate(sources, start=1):
-		print(f'{i}. {os.path.basename(file)!r}')
-	# print(f'Saving to {folder!r}')
+		for i, file in enumerate(sources, start=1):
+			print(f'{i}. {os.path.basename(file)!r}')
+		# print(f'Saving to {folder!r}')
 
-	proceed = input('Would you like to proceed? (y/n): ').lower()
-	if proceed == 'y':
-		number_of_files = len(sources)
-		folder = create_destination(number_of_files)
+		proceed = input('Would you like to proceed? (y/n): ').lower()
+		if proceed == 'y':
+			number_of_files = len(sources)
+			folder = create_destination(number_of_files)
 
-		# create directory if it doesn't exist
-		if not os.path.exists(folder):
-			os.mkdir(folder)
+			# create directory if it doesn't exist
+			if not os.path.exists(folder):
+				os.mkdir(folder)
 
-		# start extraction
-		extracted = 0
-		for n, src in enumerate(sources, start=1):
-			print(f'Extracting {n} of {number_of_files}')
+			# start extraction
+			extracted = 0
+			for n, src in enumerate(sources, start=1):
+				print(f'Extracting {n} of {number_of_files}')
 
-			# check if video file exits
-			if not os.path.exists(src):
-				# continue if it doesn't
-				print(f'{src!r} does not exist.')
-				continue
+				# check if video file exits
+				if not os.path.exists(src):
+					# continue if it doesn't
+					print(f'{src!r} does not exist.')
+					continue
 
-			# extract audio
-			result = extract_and_save(src, folder)
-			extracted += bool(result)
+				# extract audio
+				result = extract_and_save(src, folder)
+				extracted += bool(result)
 
-		print(f'Extraction complete! {extracted} '
-			f'file{["", "s"][extracted > 1]} extracted.')
+			print(f'Extraction complete! {extracted} '
+				f'file{["s", ""][extracted == 1]} extracted.')
 
-		os.startfile(folder)
+			os.startfile(folder)
 
-		# clear garbage
-		del sources, folder
-	# sys.exit()
+			# clear garbage
+			del sources, folder
+		# sys.exit()
+	else:
+		print('This directory is not or contains no video files.')
