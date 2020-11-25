@@ -12,13 +12,13 @@ _**GUI** version coming soon_
 
 ### Installing dependencies
 Use command below to install the dependencies listed in `requirements.txt`.
-```
+```console
 pip install -r requirements.txt
 ```
 
 ### Usage
 To extract an audio file, open the directory of the cloned or downloaded repository in the command line and run this command.
-```
+```console
 python script.py "path/to/file_or_folder"
 ```
 It's that simple
